@@ -33,7 +33,7 @@ jobs:
  
       - name: Maven checkstyle
         run: mvn -B checkstyle:checkstyle
- BUILD_AND_PUBLISH:
+  BUILD_AND_PUBLISH:
     needs: Testing
     runs-on: ubuntu-latest
     steps:

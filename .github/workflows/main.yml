@@ -85,11 +85,14 @@ jobs:
  
       - name: Install NGINX Ingress Controller
         run: |
-          kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/aws/deploy.yaml
-          kubectl wait --namespace ingress-nginx \
+          kubectl apply --validate=false \
+            -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/aws/deploy.yaml
+
+          kubectl wait \
+            --namespace ingress-nginx \
             --for=condition=ready pod \
             --selector=app.kubernetes.io/component=controller \
-            --timeout=300s
+            --timeout=600s
  
       - name: Create ECR pull secret in Kubernetes
         run: |
